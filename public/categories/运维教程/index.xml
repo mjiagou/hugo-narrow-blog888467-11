@@ -15,5 +15,12 @@
       <guid>http://localhost:1313/posts/docker-run-to-compose/</guid>
       <description>&lt;p&gt;对于很多刚刚接触 Docker 或者习惯了命令行的开发者来说，管理那些越来越长的 &lt;code&gt;docker run&lt;/code&gt; 启动命令简直是一场噩梦。&lt;/p&gt;&#xA;&lt;p&gt;你是否也遇到过这些情况：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;测试环境部署好的容器，过几天想迁移到生产环境，却&lt;strong&gt;忘记了当时敲了哪些参数&lt;/strong&gt;？&lt;/li&gt;&#xA;&lt;li&gt;一条启动命令包含了端口映射、环境变量、挂载卷，长度超过了 3 行，&lt;strong&gt;每次修改都小心翼翼&lt;/strong&gt;？&lt;/li&gt;&#xA;&lt;li&gt;想把几个容器编排在一起，却发现&lt;strong&gt;手动写 YAML 文件格式总是报错&lt;/strong&gt;？&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;如果你被这些问题困扰，那么 &lt;strong&gt;Docker Compose&lt;/strong&gt; 就是你的救星，而我们提供的在线转换工具能帮你一键解决烦恼。&lt;/p&gt;</description>
     </item>
+    <item>
+      <title>Linux Crontab 表达式生成与反解析完全指南</title>
+      <link>http://localhost:1313/posts/linux-crontab-guide/</link>
+      <pubDate>Fri, 09 Jan 2026 10:00:00 +0800</pubDate>
+      <guid>http://localhost:1313/posts/linux-crontab-guide/</guid>
+      <description>&lt;p&gt;在 Linux 服务器维护和后端开发中，&lt;code&gt;Crontab&lt;/code&gt; 是管理定时任务的标准方式。但说实话，除了那几个最常用的，谁能每次都准确无误地写出那个由 5 个星号组成的表达式？&lt;/p&gt;</description>
+    </item>
   </channel>
 </rss>

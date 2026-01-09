@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>JSON on 888467 出海建站指南</title>
+    <link>http://localhost:1313/tags/json/</link>
+    <description>Recent content in JSON on 888467 出海建站指南</description>
+    <generator>Hugo</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Fri, 09 Jan 2026 14:00:00 +0800</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/json/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>JSON 数据处理大全：格式化、压缩与转换 CSV 实用指南</title>
+      <link>http://localhost:1313/posts/json-data-processing-guide/</link>
+      <pubDate>Fri, 09 Jan 2026 14:00:00 +0800</pubDate>
+      <guid>http://localhost:1313/posts/json-data-processing-guide/</guid>
+      <description>&lt;p&gt;JSON (JavaScript Object Notation) 已经成为现代互联网数据交换的绝对标准。无论是后端 API 返回的数据，还是前端的配置文件，JSON 无处不在。&lt;/p&gt;&#xA;&lt;p&gt;然而，原始的 JSON 数据往往并不“人类友好”。我们提供了一系列强大的 JSON 处理工具，帮你轻松应对开发中的各种场景。&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

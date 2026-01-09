@@ -6,6 +6,7 @@ tags: ["Docker", "运维", "效率工具"]
 categories: ["运维教程"]
 author: "888467"
 description: "详解如何将复杂的 Docker Run 命令快速转换为 Docker Compose YAML 文件，提升运维效率。"
+slug: docker-run-to-compose
 ---
 
 对于很多刚刚接触 Docker 或者习惯了命令行的开发者来说，管理那些越来越长的 `docker run` 启动命令简直是一场噩梦。

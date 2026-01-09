@@ -9,15 +9,15 @@
   content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
-<title>运维教程 | 888467 出海建站指南</title>
+<title>Docker Run 命令一键转 Docker Compose：运维效率提升神器 | 888467 出海建站指南</title>
 
-<meta name="description" content="专注为出海独立开发者提供高效的技术解决方案。包含 Docker 运维、Linux 及开发工具教程。" />
-<meta name="keywords" content="229, 135, 186, 230, 181, 183, 229, 187, 186, 231, 171, 153, 44, 32, 231, 139, 172, 231, 171, 139, 229, 188, 128, 229, 143, 145, 44, 32, 229, 188, 128, 229, 143, 145, 232, 128, 133, 229, 183, 165, 229, 133, 183, 44, 32, 68, 111, 99, 107, 101, 114, 32, 230, 149, 153, 231, 168, 139, 44, 32, 76, 105, 110, 117, 120, 32, 232, 191, 144, 231, 187, 180, 44, 32, 74, 83, 79, 78, 32, 230, 140, 135, 229, 141, 151, 44, 32, 56, 56, 56, 52, 54, 55, 44, 32, 67, 114, 111, 110, 116, 97, 98, 32, 232, 161, 168, 232, 190, 190, 229, 188, 143" />
+<meta name="description" content="详解如何将复杂的 Docker Run 命令快速转换为 Docker Compose YAML 文件，提升运维效率。" />
+<meta name="keywords" content="Docker, 运维, 效率工具" />
 <meta name="author" content="888467" />
 <meta name="language" content="zh-CN" />
 
 <meta name="robots" content="index, follow" />
-<link rel="canonical" href="http://localhost:1313/categories/%E8%BF%90%E7%BB%B4%E6%95%99%E7%A8%8B/" />
+<link rel="canonical" href="http://localhost:1313/posts/docker-run-to-compose/" />
 
 
 
@@ -26,34 +26,36 @@
 
 
 <link rel="manifest" href="/site.webmanifest" />
-<meta property="og:url" content="http://localhost:1313/categories/%E8%BF%90%E7%BB%B4%E6%95%99%E7%A8%8B/">
+<meta property="og:url" content="http://localhost:1313/posts/docker-run-to-compose/">
   <meta property="og:site_name" content="888467 出海建站指南">
-  <meta property="og:title" content="运维教程">
-  <meta property="og:description" content="专注为出海独立开发者提供高效的技术解决方案。包含 Docker 运维、Linux 及开发工具教程。">
+  <meta property="og:title" content="Docker Run 命令一键转 Docker Compose：运维效率提升神器">
+  <meta property="og:description" content="详解如何将复杂的 Docker Run 命令快速转换为 Docker Compose YAML 文件，提升运维效率。">
   <meta property="og:locale" content="zh_CN">
-  <meta property="og:type" content="website">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2026-01-09T10:00:00+08:00">
+    <meta property="article:modified_time" content="2026-01-09T10:00:00+08:00">
+    <meta property="article:tag" content="Docker">
+    <meta property="article:tag" content="运维">
+    <meta property="article:tag" content="效率工具">
     <meta property="og:image" content="http://localhost:1313/images/og-default.avif">
 
 
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:image" content="http://localhost:1313/images/og-default.avif">
-  <meta name="twitter:title" content="运维教程">
-  <meta name="twitter:description" content="专注为出海独立开发者提供高效的技术解决方案。包含 Docker 运维、Linux 及开发工具教程。">
+  <meta name="twitter:title" content="Docker Run 命令一键转 Docker Compose：运维效率提升神器">
+  <meta name="twitter:description" content="详解如何将复杂的 Docker Run 命令快速转换为 Docker Compose YAML 文件，提升运维效率。">
 
 
-  <meta itemprop="name" content="运维教程">
-  <meta itemprop="description" content="专注为出海独立开发者提供高效的技术解决方案。包含 Docker 运维、Linux 及开发工具教程。">
+  <meta itemprop="name" content="Docker Run 命令一键转 Docker Compose：运维效率提升神器">
+  <meta itemprop="description" content="详解如何将复杂的 Docker Run 命令快速转换为 Docker Compose YAML 文件，提升运维效率。">
   <meta itemprop="datePublished" content="2026-01-09T10:00:00+08:00">
   <meta itemprop="dateModified" content="2026-01-09T10:00:00+08:00">
+  <meta itemprop="wordCount" content="731">
   <meta itemprop="image" content="http://localhost:1313/images/og-default.avif">
+  <meta itemprop="keywords" content="Docker,运维,效率工具">
 
 
-
-  <link
-    rel="alternate"
-    type="application/rss+xml"
-    title="888467 出海建站指南"
-    href="http://localhost:1313/categories/%E8%BF%90%E7%BB%B4%E6%95%99%E7%A8%8B/index.xml" />
 
 
 
@@ -206,9 +208,14 @@
 
 
 
+    <script src="/js/gumshoe.polyfills.min.js"></script>
 
 
 
+          <script src="/js/navigation.js" defer></script>
+
+    
+          <script src="/js/sidebar-position.js" defer></script>
 
 
 
@@ -227,6 +234,8 @@
 
 
 
+
+  
 
 
 
@@ -915,18 +924,34 @@
 
         
           
-          
-            
+          <div class="flex items-center gap-1 md:gap-2 min-w-0">
             
               
-              <span class="text-foreground flex items-center gap-0.5 md:gap-1 font-medium flex-shrink-0">
-                <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z" />
+              <a
+                href="/posts"
+                class="text-muted-foreground hover:text-primary hover:bg-primary/10 flex items-center gap-0.5 md:gap-1 rounded-lg px-1 md:px-3 py-0.5 md:py-1.5 transition-all duration-200 ease-out hover:-translate-y-0.5 hover:scale-[1.02] flex-shrink-0">
+                
+                  <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
 </svg>
-                <span class="max-w-[3rem] md:max-w-none truncate">分类</span>
-              </span>
+
+                  <span class="max-w-[3rem] md:max-w-none truncate">文章</span>
+                
+              </a>
+              <span class="text-muted-foreground/50 flex-shrink-0"
+                ><svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+</svg></span
+              >
             
-          
+            
+            <span class="text-foreground flex items-center gap-0.5 md:gap-1 font-medium min-w-0">
+              <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+</svg>
+              <span class="max-w-[8rem] md:max-w-[16rem] lg:max-w-none truncate">Docker Run 命令一键转 Docker Compose：运维效率提升神器</span>
+            </span>
+          </div>
         
       </li>
     
@@ -937,226 +962,1062 @@
 
 
   
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+  
   <header class="mb-8">
-    <div class="mb-4 flex items-center gap-3">
+    
+
+
+<div class="post-meta">
+  
+  <h1 class="text-foreground mb-6 text-3xl leading-tight font-bold md:text-4xl">
+    Docker Run 命令一键转 Docker Compose：运维效率提升神器
+  </h1>
+
+  
+  
+
+
+  
+  <div class="bg-card border-border flex flex-col gap-4 rounded-xl border p-6">
+    
+    <div
+      class="text-muted-foreground flex flex-wrap items-center gap-4 text-sm">
       
-        <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z" />
-</svg>
-      
-      <h1 class="text-foreground text-3xl font-bold">
-        运维教程
-      </h1>
-    </div>
-
-    
-      <p class="text-muted-foreground mb-6">
-        
-          分类 &#34;运维教程&#34; 下的所有文章
-        
-      </p>
-    
-
-
-    
-    <div class="text-muted-foreground flex items-center gap-4 text-sm">
-      <div class="flex items-center gap-1">
-        <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-</svg>
-        <span
-          >共 1 篇文章</span
-        >
-      </div>
-      <div class="flex items-center gap-1">
-        <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <div class="flex items-center gap-2">
+        <svg class="h-4 w-4" aria-label="发布于" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
 </svg>
 
-        <span>按时间排序</span>
-      </div>
-    </div>
-  </header>
-
-  
-  
-  
-    
-
-
-
-
-
-
-
-
-  <section class="post-list">
-    
-    
-
-
-    
-    <div class="space-y-4">
-      
-        
-
-
-
-
-<article class="group">
-  <a href="/posts/docker-run-to-compose/" class="block">
-    <div class="bg-card border-border hover:bg-primary/5 hover:border-primary/20 focus:ring-primary/20 relative flex flex-col overflow-hidden rounded-xl border transition-all duration-300 ease-out hover:-translate-y-1 hover:scale-[1.02] hover:shadow-lg focus:ring-2 focus:outline-none">
-      
-      <div class="block md:hidden">
-        <div class="aspect-[2/1] overflow-hidden">
-    
-    <div class="from-orange-500/20 to-red-500/10 relative aspect-[2/1] overflow-hidden bg-gradient-to-br" style="background-blend-mode: overlay; background-color: color-mix(in srgb, var(--color-primary) 15%, transparent);">
-      
-      <div class="absolute inset-0">
-        
-          
-          
-          <div class="absolute left-[20%] top-[20%] h-6 w-6 rounded-full border-2 border-white/80 bg-white/15"></div>
-          
-          <div class="absolute right-[25%] top-[25%] h-5 w-5 rounded-full border border-white/70 bg-white/12"></div>
-          
-          <div class="absolute left-[30%] bottom-[30%] h-4 w-4 rounded-full border border-white/60 bg-white/10"></div>
-          
-          <div class="absolute right-[20%] bottom-[20%] h-5 w-5 rounded-full border border-white/65 bg-white/13"></div>
-          
-          <div class="absolute left-[45%] top-[45%] h-3 w-3 rounded-full border border-white/50 bg-white/8"></div>
-          
-          <div class="absolute right-[35%] top-[35%] h-2 w-2 rounded-full bg-white/50"></div>
-          <div class="absolute left-[40%] bottom-[35%] h-1.5 w-1.5 rounded-full bg-white/45"></div>
-          <div class="absolute left-[35%] top-[50%] h-1 w-1 rounded-full bg-white/40"></div>
-          <div class="absolute right-[40%] bottom-[50%] h-1 w-1 rounded-full bg-white/35"></div>
-          <div class="absolute left-[50%] top-[30%] h-1 w-1 rounded-full bg-white/30"></div>
-          <div class="absolute right-[50%] bottom-[30%] h-1 w-1 rounded-full bg-white/25"></div>
-          
-          <div class="absolute top-[40%] left-[15%] h-0.5 w-6 rotate-30 bg-white/25"></div>
-          <div class="absolute bottom-[40%] right-[15%] h-0.5 w-4 -rotate-30 bg-white/20"></div>
-        
-      </div>
-    </div>
-  
-</div>
+        <time datetime="2026-01-09">
+          2026 年 01 月 09 日
+        </time>
       </div>
 
       
-      <div class="absolute top-0 right-0 hidden h-full w-80 transition-opacity duration-300 group-hover:opacity-90 md:block">
-        <div class="h-full w-full">
-    
-    <div class="from-orange-500/20 to-red-500/10 relative h-full w-full overflow-hidden bg-gradient-to-br" style="background-blend-mode: overlay; background-color: color-mix(in srgb, var(--color-primary) 15%, transparent);">
       
-      <div class="absolute inset-0">
-        
-          
-          
-          <div class="absolute left-[20%] top-[20%] h-6 w-6 rounded-full border-2 border-white/80 bg-white/15"></div>
-          
-          <div class="absolute right-[25%] top-[25%] h-5 w-5 rounded-full border border-white/70 bg-white/12"></div>
-          
-          <div class="absolute left-[30%] bottom-[30%] h-4 w-4 rounded-full border border-white/60 bg-white/10"></div>
-          
-          <div class="absolute right-[20%] bottom-[20%] h-5 w-5 rounded-full border border-white/65 bg-white/13"></div>
-          
-          <div class="absolute left-[45%] top-[45%] h-3 w-3 rounded-full border border-white/50 bg-white/8"></div>
-          
-          <div class="absolute right-[35%] top-[35%] h-2 w-2 rounded-full bg-white/50"></div>
-          <div class="absolute left-[40%] bottom-[35%] h-1.5 w-1.5 rounded-full bg-white/45"></div>
-          <div class="absolute left-[35%] top-[50%] h-1 w-1 rounded-full bg-white/40"></div>
-          <div class="absolute right-[40%] bottom-[50%] h-1 w-1 rounded-full bg-white/35"></div>
-          <div class="absolute left-[50%] top-[30%] h-1 w-1 rounded-full bg-white/30"></div>
-          <div class="absolute right-[50%] bottom-[30%] h-1 w-1 rounded-full bg-white/25"></div>
-          
-          <div class="absolute top-[40%] left-[15%] h-0.5 w-6 rotate-30 bg-white/25"></div>
-          <div class="absolute bottom-[40%] right-[15%] h-0.5 w-4 -rotate-30 bg-white/20"></div>
-        
-      </div>
-    </div>
-  
-</div>
-      </div>
+
 
       
-      <div class="absolute top-0 right-0 hidden h-full w-80 opacity-0 transition-opacity duration-300 group-hover:opacity-100 md:block bg-linear-to-l from-primary/5"></div>
-
       
-      <div class="relative z-10 flex flex-1 flex-col p-6 md:pr-84">
-        
-        <h3 class="text-foreground group-hover:text-primary mb-4 text-lg font-semibold leading-tight transition-colors duration-200">
-          Docker Run 命令一键转 Docker Compose：运维效率提升神器
-        </h3>
-
-        
-        
-          <p class="text-muted-foreground mb-4 text-sm leading-relaxed">
-            详解如何将复杂的 Docker Run 命令快速转换为 Docker Compose YAML 文件，提升运维效率。
-          </p>
-        
-
-        
-        <div class="mt-auto text-sm text-muted-foreground">
-          
-          <div class="flex items-center gap-3">
-            <div class="flex items-center gap-1.5">
-              <svg class="h-4 w-4" aria-label="发布于" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-</svg>
-
-              <time datetime="2026-01-09" class="font-medium">
-                2026 年 01 月 09 日
-              </time>
-            </div>
-            
-              <div class="flex items-center gap-1.5">
-                <svg class="h-4 w-4" aria-label="阅读时间" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <div class="flex items-center gap-2">
+          <svg class="h-4 w-4" aria-label="阅读时间" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
 </svg>
 
-                <span class="font-medium">2 分钟</span>
-              </div>
-            
+          <span
+            >2 分钟</span
+          >
+        </div>
+      
+
+
+      
+      
+        <div class="flex items-center gap-2">
+          <svg class="h-4 w-4" aria-label="字数" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7" />
+</svg>
+
+          <span>731 字</span>
+        </div>
+      
+
+    </div>
+
+    
+    
+    
+      <div class="flex flex-wrap items-center gap-4">
+        
+        
+
+        
+        
+          <div class="flex items-center gap-2">
+            <svg class="h-4 w-4" aria-label="分类" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z" />
+</svg>
+            <span class="text-muted-foreground mr-2 text-sm"
+              >分类:</span
+            >
+            <div class="flex flex-wrap gap-2">
+              
+                <a
+                  href="/categories/%E8%BF%90%E7%BB%B4%E6%95%99%E7%A8%8B/"
+                  class="bg-primary/10 text-primary hover:bg-primary/20 focus:ring-primary/20 inline-flex items-center rounded-full px-3 py-1 text-sm font-medium transition-all duration-200 ease-out hover:-translate-y-0.5 hover:scale-105 hover:shadow-md focus:ring-2 focus:outline-none">
+                  运维教程
+                </a>
+              
+            </div>
           </div>
+        
+
+
+        
+        
+          <div class="flex items-center gap-2">
+            <svg class="h-4 w-4" aria-label="标签" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+	<g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+		<path d="M12.586 2.586A2 2 0 0 0 11.172 2H4a2 2 0 0 0-2 2v7.172a2 2 0 0 0 .586 1.414l8.704 8.704a2.426 2.426 0 0 0 3.42 0l6.58-6.58a2.426 2.426 0 0 0 0-3.42z" />
+		<circle cx="7.5" cy="7.5" r=".5" fill="currentColor" />
+	</g>
+</svg>
+            <span class="text-muted-foreground mr-2 text-sm"
+              >标签:</span
+            >
+            <div class="flex flex-wrap gap-2">
+              
+                <a
+                  href="/tags/docker/"
+                  class="bg-muted/50 text-muted-foreground hover:bg-primary/10 hover:text-primary focus:ring-primary/20 inline-flex items-center rounded px-2 py-1 text-sm transition-all duration-200 ease-out hover:-translate-y-0.5 hover:scale-105 focus:ring-2 focus:outline-none">
+                  #Docker
+                </a>
+              
+                <a
+                  href="/tags/%E8%BF%90%E7%BB%B4/"
+                  class="bg-muted/50 text-muted-foreground hover:bg-primary/10 hover:text-primary focus:ring-primary/20 inline-flex items-center rounded px-2 py-1 text-sm transition-all duration-200 ease-out hover:-translate-y-0.5 hover:scale-105 focus:ring-2 focus:outline-none">
+                  #运维
+                </a>
+              
+                <a
+                  href="/tags/%E6%95%88%E7%8E%87%E5%B7%A5%E5%85%B7/"
+                  class="bg-muted/50 text-muted-foreground hover:bg-primary/10 hover:text-primary focus:ring-primary/20 inline-flex items-center rounded px-2 py-1 text-sm transition-all duration-200 ease-out hover:-translate-y-0.5 hover:scale-105 focus:ring-2 focus:outline-none">
+                  #效率工具
+                </a>
+              
+            </div>
+          </div>
+        
+
+      </div>
+    
+
+
+    
+    
+      <div class="border-border flex items-center gap-2 border-t pt-2">
+        <svg class="h-4 w-4" aria-label="作者" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+</svg>
+
+        <span class="text-muted-foreground text-sm"
+          >作者:</span
+        >
+        <span class="text-foreground text-sm font-medium"
+          >888467</span
+        >
+      </div>
+    
+
+  </div>
+</div>
+
+  </header>
+
+  
+  <article class="prose prose-neutral dark:prose-invert mb-12 max-w-none">
+    <p>对于很多刚刚接触 Docker 或者习惯了命令行的开发者来说，管理那些越来越长的 <code>docker run</code> 启动命令简直是一场噩梦。</p>
+<p>你是否也遇到过这些情况：</p>
+<ul>
+<li>测试环境部署好的容器，过几天想迁移到生产环境，却<strong>忘记了当时敲了哪些参数</strong>？</li>
+<li>一条启动命令包含了端口映射、环境变量、挂载卷，长度超过了 3 行，<strong>每次修改都小心翼翼</strong>？</li>
+<li>想把几个容器编排在一起，却发现<strong>手动写 YAML 文件格式总是报错</strong>？</li>
+</ul>
+<p>如果你被这些问题困扰，那么 <strong>Docker Compose</strong> 就是你的救星，而我们提供的在线转换工具能帮你一键解决烦恼。</p>
+<h2 id="为什么要用-docker-compose">为什么要用 Docker Compose？</h2>
+<p><code>docker run</code> 命令是命令式的（Imperative），你敲什么它执行什么，执行完就“随风而去”了，很难复用和版本控制。</p>
+<p>而 <strong>Docker Compose</strong> 是声明式的（Declarative）。你把想要的服务状态写在 <code>docker-compose.yml</code> 文件里：</p>
+<ol>
+<li><strong>可读性强</strong>：结构清晰，参数一目了然。</li>
+<li><strong>版本控制</strong>：YAML 文件可以提交到 Git 仓库，变更历史有迹可循。</li>
+<li><strong>一键启动</strong>：无论在哪里，只需 <code>docker-compose up -d</code>，服务就能完美复现。</li>
+</ol>
+<h2 id="实战如何-3-秒完成转换">实战：如何 3 秒完成转换？</h2>
+<p>我们内置了强大的转换引擎，你甚至不需要懂 YAML 语法。</p>
+<h3 id="场景演示部署一个-nginx">场景演示：部署一个 Nginx</h3>
+<p>假设你有一条很长的启动命令：</p>
+<div
+  class="code-block-container border-border bg-card my-6 overflow-hidden rounded-xl border shadow-sm transition-all duration-200 ease-out hover:-translate-y-0.5 hover:shadow-md">
+  
+  <div
+    class="code-block-header bg-muted/30 border-border flex items-center justify-between border-b px-4 py-3">
+    
+    <div class="flex items-center gap-2">
+      <div class="text-muted-foreground flex-shrink-0">
+        <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+</svg>
+      </div>
+      <span class="text-muted-foreground text-sm font-medium">
+        BASH
+      </span>
+    </div>
+
+    
+    <div class="flex items-center gap-2">
+      <button
+          class="collapse-code-btn text-muted-foreground hover:text-primary hover:bg-primary/10 focus:ring-primary/20 flex items-center gap-1.5 rounded-md px-2 py-1 text-xs font-medium transition-all duration-200 ease-out focus:ring-2 focus:outline-none"
+          data-code-id="code-0"
+          data-default-state="expanded"
+          data-collapsed="false"
+          data-auto-collapse-lines="30"
+          data-auto-collapse-height="400"
+          data-collapsed-height="120"
+          title="折叠"
+          aria-label="折叠">
+          <span class="collapse-icon">
+            <svg class="h-3 w-3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="currentColor" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6l-6 6z"/></svg>
+          </span>
+          <span class="collapse-text hidden sm:inline"
+            >折叠</span
+          >
+        </button>
+      <button
+        class="copy-code-btn text-muted-foreground hover:text-primary hover:bg-primary/10 focus:ring-primary/20 flex items-center gap-1.5 rounded-md px-2 py-1 text-xs font-medium transition-all duration-200 ease-out focus:ring-2 focus:outline-none"
+        data-code-id="code-0"
+        title="复制"
+        aria-label="复制">
+        <span class="copy-icon">
+          <svg class="h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+</svg>
+        </span>
+        <span class="copy-text hidden sm:inline"
+          >复制</span
+        >
+      </button>
+    </div>
+  </div>
+
+  
+  <div class="code-block-content relative" id="code-0">
+    <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">docker run -d <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  --name web-server <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  -p 8080:80 <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  -v /var/www/html:/usr/share/nginx/html <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  --restart always <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  nginx:latest</span></span></code></pre></div>
+    
+    <div
+      class="collapse-overlay to-card/90 pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent via-transparent opacity-0 transition-opacity duration-300">
+      <div
+        class="text-muted-foreground bg-card/80 border-border/50 hover:bg-primary/10 hover:text-primary hover:border-primary/30 absolute bottom-4 left-1/2 -translate-x-1/2 cursor-pointer rounded-full border px-3 py-1.5 text-xs backdrop-blur-sm transition-all duration-200">
+        点击展开查看更多
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script>
+(function() {
+  const codeId = 'code-0';
+  const copyBtn = document.querySelector('.copy-code-btn[data-code-id="' + codeId + '"]');
+  const collapseBtn = document.querySelector('.collapse-code-btn[data-code-id="' + codeId + '"]');
+  const codeContainer = document.getElementById(codeId);
+
+  if (!codeContainer) return;
+
+  
+  if (copyBtn) {
+    const copyIcon = copyBtn.querySelector('.copy-icon');
+    const copyText = copyBtn.querySelector('.copy-text');
+
+    copyBtn.addEventListener('click', async function() {
+      try {
+        
+        let codeText = '';
+
+        
+        const codeTableCell = codeContainer.querySelector('.lntd:last-child code');
+        if (codeTableCell) {
+          codeText = codeTableCell.textContent || codeTableCell.innerText;
+        } else {
+          
+          const codeElement = codeContainer.querySelector('code');
+          if (codeElement) {
+            
+            const hasInlineLineNumbers = codeElement.querySelector('.ln');
+            if (hasInlineLineNumbers) {
+              
+              const codeLines = codeElement.querySelectorAll('.cl');
+              if (codeLines.length > 0) {
+                codeText = Array.from(codeLines)
+                  .map(line => {
+                    const text = line.textContent || line.innerText;
+                    
+                    return text.replace(/\n+$/, '');
+                  })
+                  .join('\n')
+                  .replace(/\n+$/, ''); 
+              } else {
+                
+                const allText = codeElement.textContent || codeElement.innerText;
+                codeText = allText.replace(/^\d+/gm, '').replace(/^\s+/gm, '');
+              }
+            } else {
+              
+              codeText = codeElement.textContent || codeElement.innerText;
+            }
+          } else {
+            
+            codeText = codeContainer.textContent || codeContainer.innerText;
+          }
+        }
+
+        
+        codeText = codeText.trim();
+
+        
+        await navigator.clipboard.writeText(codeText);
+
+        
+        copyIcon.innerHTML = `\u003csvg class=\u0022h-3 w-3\u0022 fill=\u0022none\u0022 stroke=\u0022currentColor\u0022 viewBox=\u00220 0 24 24\u0022 xmlns=\u0022http:\/\/www.w3.org\/2000\/svg\u0022\u003e\n  \u003cpath stroke-linecap=\u0022round\u0022 stroke-linejoin=\u0022round\u0022 stroke-width=\u00222\u0022 d=\u0022M5 13l4 4L19 7\u0022 \/\u003e\n\u003c\/svg\u003e`;
+        if (copyText) {
+          copyText.textContent = '已复制';
+        }
+        copyBtn.classList.add('text-green-600');
+
+        
+        setTimeout(() => {
+          copyIcon.innerHTML = `\u003csvg class=\u0022h-3 w-3\u0022 fill=\u0022none\u0022 stroke=\u0022currentColor\u0022 viewBox=\u00220 0 24 24\u0022 xmlns=\u0022http:\/\/www.w3.org\/2000\/svg\u0022\u003e\n  \u003cpath stroke-linecap=\u0022round\u0022 stroke-linejoin=\u0022round\u0022 stroke-width=\u00222\u0022 d=\u0022M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z\u0022 \/\u003e\n\u003c\/svg\u003e`;
+          if (copyText) {
+            copyText.textContent = '复制';
+          }
+          copyBtn.classList.remove('text-green-600');
+        }, 2000);
+
+      } catch (err) {
+        console.error('复制失败:', err);
+
+        
+        const range = document.createRange();
+        const codeElement = codeContainer.querySelector('code') || codeContainer;
+        range.selectNodeContents(codeElement);
+        const selection = window.getSelection();
+        selection.removeAllRanges();
+        selection.addRange(range);
+
+        
+        if (copyText) {
+          copyText.textContent = '已选择';
+        }
+
+        setTimeout(() => {
+          if (copyText) {
+            copyText.textContent = '复制';
+          }
+          selection.removeAllRanges();
+        }, 2000);
+      }
+    });
+  }
+
+  
+  if (collapseBtn) {
+    const collapseIcon = collapseBtn.querySelector('.collapse-icon');
+    const collapseText = collapseBtn.querySelector('.collapse-text');
+    const collapseOverlay = codeContainer.querySelector('.collapse-overlay');
+
+    
+    let codeElement = codeContainer.querySelector('pre.chroma');
+    if (!codeElement) {
+      codeElement = codeContainer.querySelector('pre');
+    }
+
+    const defaultState = collapseBtn.dataset.defaultState || 'expanded';
+    const isCollapsedAttr = collapseBtn.dataset.collapsed === 'true';
+    const autoCollapseLines = parseInt(collapseBtn.dataset.autoCollapseLines) || 30;
+    const autoCollapseHeight = parseInt(collapseBtn.dataset.autoCollapseHeight) || 400;
+    const collapsedHeight = parseInt(collapseBtn.dataset.collapsedHeight) || 120;
+
+    let isCollapsed = false;
+
+    
+    function initCollapse() {
+      
+      const shouldCollapse = isCollapsedAttr ||
+                           defaultState === 'collapsed' ||
+                           shouldAutoCollapse();
+
+      if (shouldCollapse) {
+        setCollapsed(true, false); 
+      }
+    }
+
+    function shouldAutoCollapse() {
+      
+      if (codeElement) {
+        const lines = codeElement.querySelectorAll('.line, .cl');
+        const height = codeElement.offsetHeight;
+        return lines.length > autoCollapseLines || height > autoCollapseHeight;
+      }
+
+      
+      const containerHeight = codeContainer.offsetHeight;
+      if (containerHeight > autoCollapseHeight) {
+        return true;
+      }
+
+      
+      const textContent = codeContainer.textContent || codeContainer.innerText || '';
+      const estimatedLines = textContent.split('\n').length;
+      return estimatedLines > autoCollapseLines;
+    }
+
+    function setCollapsed(collapsed, animate = true) {
+      if (!collapseOverlay) return;
+
+      isCollapsed = collapsed;
+
+      if (collapsed) {
+        
+        codeContainer.style.maxHeight = collapsedHeight + 'px';
+        codeContainer.style.overflow = 'hidden';
+        collapseOverlay.style.opacity = '1';
+        collapseOverlay.style.pointerEvents = 'auto';
+
+        
+        collapseIcon.innerHTML = `\u003csvg class=\u0022h-3 w-3\u0022 fill=\u0022none\u0022 stroke=\u0022currentColor\u0022 viewBox=\u00220 0 24 24\u0022 xmlns=\u0022http:\/\/www.w3.org\/2000\/svg\u0022\u003e\n  \u003cpath stroke-linecap=\u0022round\u0022 stroke-linejoin=\u0022round\u0022 stroke-width=\u00222\u0022 d=\u0022M19 9l-7 7-7-7\u0022 \/\u003e\n\u003c\/svg\u003e`;
+        if (collapseText) {
+          collapseText.textContent = '展开';
+        }
+        collapseBtn.title = '展开';
+
+      } else {
+        
+        codeContainer.style.maxHeight = '';
+        codeContainer.style.overflow = '';
+        collapseOverlay.style.opacity = '0';
+        collapseOverlay.style.pointerEvents = 'none';
+
+        
+        collapseIcon.innerHTML = `\u003csvg class=\u0022h-3 w-3\u0022 xmlns=\u0022http:\/\/www.w3.org\/2000\/svg\u0022 viewBox=\u00220 0 24 24\u0022\u003e\u003cpath fill=\u0022currentColor\u0022 d=\u0022M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6l-6 6z\u0022\/\u003e\u003c\/svg\u003e`;
+        if (collapseText) {
+          collapseText.textContent = '折叠';
+        }
+        collapseBtn.title = '折叠';
+      }
+
+      
+      if (animate) {
+        codeContainer.style.transition = 'max-height 0.3s ease-out';
+        setTimeout(() => {
+          codeContainer.style.transition = '';
+        }, 300);
+      }
+    }
+
+    function toggleCollapse() {
+      setCollapsed(!isCollapsed, true);
+    }
+
+    
+    collapseBtn.addEventListener('click', toggleCollapse);
+
+    
+    if (collapseOverlay) {
+      collapseOverlay.addEventListener('click', () => {
+        if (isCollapsed) {
+          setCollapsed(false, true);
+        }
+      });
+    }
+
+    
+    initCollapse();
+  }
+})();
+</script>
+<p><strong>操作步骤：</strong></p>
+<ol>
+<li>复制上面那段 <code>docker run</code> 命令。</li>
+<li>点击 <strong><a href="https://888467.xyz/docker-run-to-docker-compose-converter"target="_blank"
+  class="inline-flex items-center gap-1"
+>Docker Run 转 Docker Compose<svg class="h-3 w-3 flex-shrink-0" id="external-link" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 3h6v6m-11 5L21 3m-3 10v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg>
+</a></strong> 进入工具。</li>
+<li>将命令粘贴到左侧输入框。</li>
+<li>右侧会自动生成如下的标准 YAML：</li>
+</ol>
+<div
+  class="code-block-container border-border bg-card my-6 overflow-hidden rounded-xl border shadow-sm transition-all duration-200 ease-out hover:-translate-y-0.5 hover:shadow-md">
+  
+  <div
+    class="code-block-header bg-muted/30 border-border flex items-center justify-between border-b px-4 py-3">
+    
+    <div class="flex items-center gap-2">
+      <div class="text-muted-foreground flex-shrink-0">
+        <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+</svg>
+      </div>
+      <span class="text-muted-foreground text-sm font-medium">
+        YAML
+      </span>
+    </div>
+
+    
+    <div class="flex items-center gap-2">
+      <button
+          class="collapse-code-btn text-muted-foreground hover:text-primary hover:bg-primary/10 focus:ring-primary/20 flex items-center gap-1.5 rounded-md px-2 py-1 text-xs font-medium transition-all duration-200 ease-out focus:ring-2 focus:outline-none"
+          data-code-id="code-1"
+          data-default-state="expanded"
+          data-collapsed="false"
+          data-auto-collapse-lines="30"
+          data-auto-collapse-height="400"
+          data-collapsed-height="120"
+          title="折叠"
+          aria-label="折叠">
+          <span class="collapse-icon">
+            <svg class="h-3 w-3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="currentColor" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6l-6 6z"/></svg>
+          </span>
+          <span class="collapse-text hidden sm:inline"
+            >折叠</span
+          >
+        </button>
+      <button
+        class="copy-code-btn text-muted-foreground hover:text-primary hover:bg-primary/10 focus:ring-primary/20 flex items-center gap-1.5 rounded-md px-2 py-1 text-xs font-medium transition-all duration-200 ease-out focus:ring-2 focus:outline-none"
+        data-code-id="code-1"
+        title="复制"
+        aria-label="复制">
+        <span class="copy-icon">
+          <svg class="h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+</svg>
+        </span>
+        <span class="copy-text hidden sm:inline"
+          >复制</span
+        >
+      </button>
+    </div>
+  </div>
+
+  
+  <div class="code-block-content relative" id="code-1">
+    <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;3.3&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">services</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">nginx</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l">web-server</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">ports</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span>- <span class="s1">&#39;8080:80&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">volumes</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span>- <span class="s1">&#39;/var/www/html:/usr/share/nginx/html&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">restart</span><span class="p">:</span><span class="w"> </span><span class="l">always</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;nginx:latest&#39;</span></span></span></code></pre></div>
+    
+    <div
+      class="collapse-overlay to-card/90 pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent via-transparent opacity-0 transition-opacity duration-300">
+      <div
+        class="text-muted-foreground bg-card/80 border-border/50 hover:bg-primary/10 hover:text-primary hover:border-primary/30 absolute bottom-4 left-1/2 -translate-x-1/2 cursor-pointer rounded-full border px-3 py-1.5 text-xs backdrop-blur-sm transition-all duration-200">
+        点击展开查看更多
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script>
+(function() {
+  const codeId = 'code-1';
+  const copyBtn = document.querySelector('.copy-code-btn[data-code-id="' + codeId + '"]');
+  const collapseBtn = document.querySelector('.collapse-code-btn[data-code-id="' + codeId + '"]');
+  const codeContainer = document.getElementById(codeId);
+
+  if (!codeContainer) return;
+
+  
+  if (copyBtn) {
+    const copyIcon = copyBtn.querySelector('.copy-icon');
+    const copyText = copyBtn.querySelector('.copy-text');
+
+    copyBtn.addEventListener('click', async function() {
+      try {
+        
+        let codeText = '';
+
+        
+        const codeTableCell = codeContainer.querySelector('.lntd:last-child code');
+        if (codeTableCell) {
+          codeText = codeTableCell.textContent || codeTableCell.innerText;
+        } else {
+          
+          const codeElement = codeContainer.querySelector('code');
+          if (codeElement) {
+            
+            const hasInlineLineNumbers = codeElement.querySelector('.ln');
+            if (hasInlineLineNumbers) {
+              
+              const codeLines = codeElement.querySelectorAll('.cl');
+              if (codeLines.length > 0) {
+                codeText = Array.from(codeLines)
+                  .map(line => {
+                    const text = line.textContent || line.innerText;
+                    
+                    return text.replace(/\n+$/, '');
+                  })
+                  .join('\n')
+                  .replace(/\n+$/, ''); 
+              } else {
+                
+                const allText = codeElement.textContent || codeElement.innerText;
+                codeText = allText.replace(/^\d+/gm, '').replace(/^\s+/gm, '');
+              }
+            } else {
+              
+              codeText = codeElement.textContent || codeElement.innerText;
+            }
+          } else {
+            
+            codeText = codeContainer.textContent || codeContainer.innerText;
+          }
+        }
+
+        
+        codeText = codeText.trim();
+
+        
+        await navigator.clipboard.writeText(codeText);
+
+        
+        copyIcon.innerHTML = `\u003csvg class=\u0022h-3 w-3\u0022 fill=\u0022none\u0022 stroke=\u0022currentColor\u0022 viewBox=\u00220 0 24 24\u0022 xmlns=\u0022http:\/\/www.w3.org\/2000\/svg\u0022\u003e\n  \u003cpath stroke-linecap=\u0022round\u0022 stroke-linejoin=\u0022round\u0022 stroke-width=\u00222\u0022 d=\u0022M5 13l4 4L19 7\u0022 \/\u003e\n\u003c\/svg\u003e`;
+        if (copyText) {
+          copyText.textContent = '已复制';
+        }
+        copyBtn.classList.add('text-green-600');
+
+        
+        setTimeout(() => {
+          copyIcon.innerHTML = `\u003csvg class=\u0022h-3 w-3\u0022 fill=\u0022none\u0022 stroke=\u0022currentColor\u0022 viewBox=\u00220 0 24 24\u0022 xmlns=\u0022http:\/\/www.w3.org\/2000\/svg\u0022\u003e\n  \u003cpath stroke-linecap=\u0022round\u0022 stroke-linejoin=\u0022round\u0022 stroke-width=\u00222\u0022 d=\u0022M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z\u0022 \/\u003e\n\u003c\/svg\u003e`;
+          if (copyText) {
+            copyText.textContent = '复制';
+          }
+          copyBtn.classList.remove('text-green-600');
+        }, 2000);
+
+      } catch (err) {
+        console.error('复制失败:', err);
+
+        
+        const range = document.createRange();
+        const codeElement = codeContainer.querySelector('code') || codeContainer;
+        range.selectNodeContents(codeElement);
+        const selection = window.getSelection();
+        selection.removeAllRanges();
+        selection.addRange(range);
+
+        
+        if (copyText) {
+          copyText.textContent = '已选择';
+        }
+
+        setTimeout(() => {
+          if (copyText) {
+            copyText.textContent = '复制';
+          }
+          selection.removeAllRanges();
+        }, 2000);
+      }
+    });
+  }
+
+  
+  if (collapseBtn) {
+    const collapseIcon = collapseBtn.querySelector('.collapse-icon');
+    const collapseText = collapseBtn.querySelector('.collapse-text');
+    const collapseOverlay = codeContainer.querySelector('.collapse-overlay');
+
+    
+    let codeElement = codeContainer.querySelector('pre.chroma');
+    if (!codeElement) {
+      codeElement = codeContainer.querySelector('pre');
+    }
+
+    const defaultState = collapseBtn.dataset.defaultState || 'expanded';
+    const isCollapsedAttr = collapseBtn.dataset.collapsed === 'true';
+    const autoCollapseLines = parseInt(collapseBtn.dataset.autoCollapseLines) || 30;
+    const autoCollapseHeight = parseInt(collapseBtn.dataset.autoCollapseHeight) || 400;
+    const collapsedHeight = parseInt(collapseBtn.dataset.collapsedHeight) || 120;
+
+    let isCollapsed = false;
+
+    
+    function initCollapse() {
+      
+      const shouldCollapse = isCollapsedAttr ||
+                           defaultState === 'collapsed' ||
+                           shouldAutoCollapse();
+
+      if (shouldCollapse) {
+        setCollapsed(true, false); 
+      }
+    }
+
+    function shouldAutoCollapse() {
+      
+      if (codeElement) {
+        const lines = codeElement.querySelectorAll('.line, .cl');
+        const height = codeElement.offsetHeight;
+        return lines.length > autoCollapseLines || height > autoCollapseHeight;
+      }
+
+      
+      const containerHeight = codeContainer.offsetHeight;
+      if (containerHeight > autoCollapseHeight) {
+        return true;
+      }
+
+      
+      const textContent = codeContainer.textContent || codeContainer.innerText || '';
+      const estimatedLines = textContent.split('\n').length;
+      return estimatedLines > autoCollapseLines;
+    }
+
+    function setCollapsed(collapsed, animate = true) {
+      if (!collapseOverlay) return;
+
+      isCollapsed = collapsed;
+
+      if (collapsed) {
+        
+        codeContainer.style.maxHeight = collapsedHeight + 'px';
+        codeContainer.style.overflow = 'hidden';
+        collapseOverlay.style.opacity = '1';
+        collapseOverlay.style.pointerEvents = 'auto';
+
+        
+        collapseIcon.innerHTML = `\u003csvg class=\u0022h-3 w-3\u0022 fill=\u0022none\u0022 stroke=\u0022currentColor\u0022 viewBox=\u00220 0 24 24\u0022 xmlns=\u0022http:\/\/www.w3.org\/2000\/svg\u0022\u003e\n  \u003cpath stroke-linecap=\u0022round\u0022 stroke-linejoin=\u0022round\u0022 stroke-width=\u00222\u0022 d=\u0022M19 9l-7 7-7-7\u0022 \/\u003e\n\u003c\/svg\u003e`;
+        if (collapseText) {
+          collapseText.textContent = '展开';
+        }
+        collapseBtn.title = '展开';
+
+      } else {
+        
+        codeContainer.style.maxHeight = '';
+        codeContainer.style.overflow = '';
+        collapseOverlay.style.opacity = '0';
+        collapseOverlay.style.pointerEvents = 'none';
+
+        
+        collapseIcon.innerHTML = `\u003csvg class=\u0022h-3 w-3\u0022 xmlns=\u0022http:\/\/www.w3.org\/2000\/svg\u0022 viewBox=\u00220 0 24 24\u0022\u003e\u003cpath fill=\u0022currentColor\u0022 d=\u0022M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6l-6 6z\u0022\/\u003e\u003c\/svg\u003e`;
+        if (collapseText) {
+          collapseText.textContent = '折叠';
+        }
+        collapseBtn.title = '折叠';
+      }
+
+      
+      if (animate) {
+        codeContainer.style.transition = 'max-height 0.3s ease-out';
+        setTimeout(() => {
+          codeContainer.style.transition = '';
+        }, 300);
+      }
+    }
+
+    function toggleCollapse() {
+      setCollapsed(!isCollapsed, true);
+    }
+
+    
+    collapseBtn.addEventListener('click', toggleCollapse);
+
+    
+    if (collapseOverlay) {
+      collapseOverlay.addEventListener('click', () => {
+        if (isCollapsed) {
+          setCollapsed(false, true);
+        }
+      });
+    }
+
+    
+    initCollapse();
+  }
+})();
+</script>
+<p>就是这么简单！现在你可以直接把右侧的代码保存为 <code>docker-compose.yml</code>，然后执行 <code>docker-compose up -d</code> 即可。</p>
+<h2 id="进阶技巧">进阶技巧</h2>
+<ul>
+<li><strong>处理环境变量</strong>：如果你的命令中包含大量 <code>-e MYSQL_PASSWORD=xxx</code>，转换器会自动将其格式化为 <code>environment</code> 列表，非常便于阅读。</li>
+<li><strong>网络模式</strong>：复杂的 <code>--net</code> 或 <code>--link</code> 参数也能被完美识别并转换为 Compose 的网络配置。</li>
+</ul>
+
+  <blockquote
+    class="border-primary bg-muted/30 hover:bg-muted/40 my-6 rounded-r-lg border-l-4 py-4 pr-4 pl-6 italic transition-all duration-200 ease-out hover:translate-x-1">
+    <div class="prose prose-sm max-w-none">
+      <p><strong>立即体验</strong>：👉 <a href="https://888467.xyz/docker-run-to-docker-compose-converter"target="_blank"
+  class="inline-flex items-center gap-1"
+>点击这里使用 Docker Run 在线转换工具<svg class="h-3 w-3 flex-shrink-0" id="external-link" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 3h6v6m-11 5L21 3m-3 10v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg>
+</a></p>
+    </div>
+  </blockquote><script>
+function toggleAlert(alertId) {
+  const content = document.getElementById(alertId + '-content');
+  const chevron = document.getElementById(alertId + '-chevron');
+  const header = content.previousElementSibling;
+  
+  if (content.classList.contains('hidden')) {
+    content.classList.remove('hidden');
+    chevron.style.transform = 'rotate(0deg)';
+    header.setAttribute('aria-expanded', 'true');
+  } else {
+    content.classList.add('hidden');
+    chevron.style.transform = 'rotate(-90deg)';
+    header.setAttribute('aria-expanded', 'false');
+  }
+}
+
+
+document.addEventListener('DOMContentLoaded', function() {
+  const collapsedAlerts = document.querySelectorAll('.alert-content.hidden');
+  collapsedAlerts.forEach(function(content) {
+    const alertId = content.id.replace('-content', '');
+    const chevron = document.getElementById(alertId + '-chevron');
+    if (chevron) {
+      chevron.style.transform = 'rotate(-90deg)';
+    }
+  });
+});
+</script>
+
+
+  </article>
+
+  
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  <div class="post-license bg-muted/30 border-border mb-8 rounded-xl border p-6">
+    <div class="flex items-start gap-4">
+      
+      <div
+        class="bg-primary/10 flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-lg">
+        <svg class="h-6 w-6" aria-label="许可证" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+</svg>
+      </div>
+
+      
+      <div class="flex-1 min-w-0">
+        <h3 class="text-foreground mb-2 text-lg font-semibold">
+          版权声明
+        </h3>
+
+        <div class="text-muted-foreground space-y-2 text-sm">
+          
+          
+          <p>
+            <strong>作者:</strong>
+            Hugo Narrow
+          </p>
+          
+
+          
+          <p>
+            <strong>链接:</strong>
+            <a
+              href="http://localhost:1313/posts/docker-run-to-compose/"
+              class="text-primary hover:text-primary/80 transition-colors break-all hyphens-auto duration-200">
+              http://localhost:1313/posts/docker-run-to-compose/
+            </a>
+          </p>
+
+          
+          <p>
+            <strong>许可证:</strong>
+            
+              <a
+                href="https://creativecommons.org/licenses/by-nc-sa/4.0/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-primary hover:text-primary/80 transition-colors duration-200">
+                CC BY-NC-SA 4.0
+              </a>
+            
+          </p>
 
           
           
-            <div class="flex flex-wrap items-center gap-1.5 mt-2">
-              
-                <span class="bg-muted/50 border-muted/30 flex items-center gap-1 rounded-md border px-2 py-1">
-                  <span class="font-medium">Docker</span>
-                </span>
-              
-                <span class="bg-muted/50 border-muted/30 flex items-center gap-1 rounded-md border px-2 py-1">
-                  <span class="font-medium">运维</span>
-                </span>
-              
-                <span class="bg-muted/50 border-muted/30 flex items-center gap-1 rounded-md border px-2 py-1">
-                  <span class="font-medium">效率工具</span>
-                </span>
-              
-            </div>
+          <p class="text-xs">
+            This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License. Please attribute the source, use non-commercially, and maintain the same license.
+          </p>
           
         </div>
       </div>
     </div>
-  </a>
-</article>
+  </div>
+
+
+
+  
+  
+
+
+
+
+
+  <nav
+    class="post-navigation mb-12"
+    aria-label="文章导航">
+    <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
       
+      <div class="nav-item">
+        
+          <a
+            href="/posts/%E7%9F%AD%E4%BB%A3%E7%A0%81%E7%A4%BA%E4%BE%8B/"
+            class="group bg-card border-border hover:bg-primary/5 hover:border-primary/20 focus:ring-primary/20 flex min-h-[140px] flex-col justify-between rounded-xl border p-6 transition-all duration-300 ease-out hover:-translate-y-1 hover:scale-[1.02] hover:shadow-lg focus:ring-2 focus:outline-none">
+            <div>
+              <div class="mb-3 flex items-center gap-3">
+                <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+</svg>
+                <span class="text-muted-foreground text-sm font-medium">
+                  上一篇
+                </span>
+              </div>
+
+              <h3
+                class="text-foreground group-hover:text-primary mb-3 line-clamp-2 text-lg leading-tight font-semibold transition-colors duration-200">
+                短代码示例
+              </h3>
+            </div>
+
+            <div
+              class="text-muted-foreground mt-auto flex items-center gap-2 text-xs">
+              <svg class="h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+</svg>
+
+              <time datetime="2025-12-26">
+                12 月 26 日
+              </time>
+            </div>
+          </a>
+        
+      </div>
+
+      
+      <div class="nav-item">
+        
+          <div
+            class="bg-muted/30 border-border/50 flex min-h-[140px] flex-col justify-center rounded-xl border p-6">
+            <div class="mb-3 flex items-center justify-end gap-3">
+              <span class="text-muted-foreground/50 text-sm font-medium">
+                没有下一篇
+              </span>
+              <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+</svg>
+            </div>
+            <p class="text-muted-foreground/50 text-right text-sm">
+              这是最新的文章
+            </p>
+          </div>
+        
+      </div>
     </div>
-
-    
-    
-
-  </section>
+  </nav>
 
 
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+
+  
   
 
 
     </main>
 
     
+        
+
+
+  
+
+  
+
+  
+  <aside
+    id="toc-sidebar"
+    class="toc-sidebar hidden xl:block fixed toc-sidebar-left"
+    style="max-width: 280px; max-height: 80vh;"
+    aria-label="文章目录导航">
+
+    
+    <div class="mb-4 flex items-center gap-2">
+      <svg class="h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <line x1="8" x2="21" y1="6" y2="6"/>
+  <line x1="8" x2="21" y1="12" y2="12"/>
+  <line x1="8" x2="21" y1="18" y2="18"/>
+  <line x1="3" x2="3.01" y1="6" y2="6"/>
+  <line x1="3" x2="3.01" y1="12" y2="12"/>
+  <line x1="3" x2="3.01" y1="18" y2="18"/>
+</svg>
+
+      <h2 class="text-foreground text-sm font-semibold">
+        目录
+      </h2>
+    </div>
+
+    
+    <nav
+      id="toc-sidebar-content"
+      class="toc-sidebar-scroll overflow-y-auto pr-2"
+      style="max-height: calc(80vh - 3rem);">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#为什么要用-docker-compose">为什么要用 Docker Compose？</a></li>
+    <li><a href="#实战如何-3-秒完成转换">实战：如何 3 秒完成转换？</a>
+      <ul>
+        <li><a href="#场景演示部署一个-nginx">场景演示：部署一个 Nginx</a></li>
+      </ul>
+    </li>
+    <li><a href="#进阶技巧">进阶技巧</a></li>
+  </ul>
+</nav>
+    </nav>
+  </aside>
+
+
 
     <footer class="mx-auto max-w-4xl px-4 py-8">
   <div class="px-6 py-6">
@@ -1375,6 +2236,31 @@
     
     
 
+        
+
+        
+
+        <button
+          id="dock-navigation"
+          class="text-muted-foreground hover:text-primary hover:bg-primary/10 focus:ring-primary/20 xs:px-2 xs:py-1.5 flex flex-shrink-0 items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium transition-all duration-300 ease-out hover:-translate-y-0.5 hover:scale-105 focus:ring-2 focus:outline-none sm:px-3 sm:py-2 "
+          title="目录"
+          aria-label="目录">
+          <svg class="h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <line x1="8" x2="21" y1="6" y2="6"/>
+  <line x1="8" x2="21" y1="12" y2="12"/>
+  <line x1="8" x2="21" y1="18" y2="18"/>
+  <line x1="3" x2="3.01" y1="6" y2="6"/>
+  <line x1="3" x2="3.01" y1="12" y2="12"/>
+  <line x1="3" x2="3.01" y1="18" y2="18"/>
+</svg>
+
+          <span class="hidden sm:inline">目录</span>
+        </button>
+
+        
+        <div class="bg-border xs:mx-1 mx-2 h-6 w-px sm:mx-2 "></div>
+    
+
 
     
     <button
@@ -1421,6 +2307,104 @@
 
 
     
+      
+
+
+
+
+
+
+
+
+
+
+  
+  <div
+    id="navigation-overlay"
+    class="pointer-events-none fixed inset-0 z-40 bg-black/50 opacity-0 backdrop-blur-sm transition-all duration-300 "
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="navigation-title"></div>
+
+  
+  <div
+    id="navigation-card"
+    class="pointer-events-none fixed inset-4 z-50 flex w-auto scale-95 items-center justify-center opacity-0 transition-all duration-300 sm:inset-auto sm:top-1/2 sm:left-1/2 sm:block sm:w-full sm:max-w-md sm:-translate-x-1/2 sm:-translate-y-1/2 "
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="navigation-title">
+    <div
+      class="bg-card border-border w-full max-w-sm overflow-hidden rounded-xl border shadow-xl sm:max-w-md">
+      
+      <div
+        class="border-border bg-muted/30 flex items-center justify-between border-b p-4">
+        <div class="flex items-center gap-3">
+          <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <line x1="8" x2="21" y1="6" y2="6"/>
+  <line x1="8" x2="21" y1="12" y2="12"/>
+  <line x1="8" x2="21" y1="18" y2="18"/>
+  <line x1="3" x2="3.01" y1="6" y2="6"/>
+  <line x1="3" x2="3.01" y1="12" y2="12"/>
+  <line x1="3" x2="3.01" y1="18" y2="18"/>
+</svg>
+
+          <h2 id="navigation-title" class="text-foreground text-lg font-semibold">
+            
+              目录
+            
+          </h2>
+        </div>
+
+        
+        <button
+          id="navigation-close"
+          class="text-muted-foreground hover:text-primary hover:bg-primary/10 focus:ring-primary/20 rounded-lg p-2 transition-all duration-200 ease-out hover:-translate-y-0.5 hover:scale-105 focus:ring-2 focus:outline-none"
+          title="关闭"
+          aria-label="关闭">
+          <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+</svg>
+
+        </button>
+      </div>
+
+      
+
+      
+      <div class="max-h-96 overflow-y-auto p-4">
+        
+        <nav
+          id="nav-content-toc"
+          class="nav-content block"
+          aria-label="文章目录导航">
+            <div id="toc-content">
+              <nav id="TableOfContents">
+  <ul>
+    <li><a href="#为什么要用-docker-compose">为什么要用 Docker Compose？</a></li>
+    <li><a href="#实战如何-3-秒完成转换">实战：如何 3 秒完成转换？</a>
+      <ul>
+        <li><a href="#场景演示部署一个-nginx">场景演示：部署一个 Nginx</a></li>
+      </ul>
+    </li>
+    <li><a href="#进阶技巧">进阶技巧</a></li>
+  </ul>
+</nav>
+            </div>
+        </nav>
+
+        
+      </div>
+
+      
+      <div class="border-border bg-muted/20 border-t px-4 py-3">
+        <div class="text-muted-foreground text-center text-xs">
+          <span>点击标题快速跳转</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
     
 
 

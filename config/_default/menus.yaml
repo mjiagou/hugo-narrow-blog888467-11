@@ -46,7 +46,7 @@ footer:
 # footer social link
 social:
   - name: GitHub
-    url: https://github.com/username
+    url: https://github.com/mjiaguo/hugo-narrow-blog888467-11
     weight: 10
     params:
       icon: github

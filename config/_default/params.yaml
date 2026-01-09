@@ -1,9 +1,9 @@
 # Basic site info with SEO
-description: "A modern, clean, and minimal Hugo theme built with Tailwind CSS 4.0. Support custom themes, dark mode, and responsive design."
-keywords: ["Hugo", "Blog", "Theme", "Technology", "Programming"]
-defaultAuthor: "Hugo Narrow"
-language: "en-US"
-shortName: "Hugo Narrow"  # PWA
+description: "专注为出海独立开发者提供高效的技术解决方案。包含 Docker 运维、Linux 及开发工具教程。"
+keywords: "出海建站, 独立开发, 开发者工具, Docker 教程, Linux 运维, JSON 指南, 888467, Crontab 表达式"
+defaultAuthor: "888467"
+language: "zh-CN"
+shortName: "888467"
 images:
   - "/images/og-default.avif"
 
@@ -13,13 +13,13 @@ favicon:
 
 # Author info
 author:
-  name: "Hugo Narrow"
-  title: "A Clean and Minimal Hugo Theme"
-  description: "Focused on content and user experience."
+  name: "888467"
+  title: "出海建站指南"
+  description: "专注为出海独立开发者提供高效的技术解决方案。包含 Docker 运维、Linux 及开发工具教程。"
   avatar: "/images/avatar.svg"
   social:
     - name: "GitHub"
-      url: "https://github.com/username"
+      url: "https://github.com/mjiaguo/hugo-narrow-blog888467-11"
       icon: "github"
     - name: "Twitter"
       url: "https://twitter.com/username"
